@@ -11,21 +11,20 @@ script: "./travis-tool.sh run_tests"
 after_failure:
 - "./travis-tool.sh dump_logs"
 after_success:
-  - "Rscript -e 'library(covr);coveralls()'"
+- Rscript -e 'library(covr);coveralls()'
 notifications:
   email:
     on_success: change
     on_failure: change
   hipchat:
     rooms:
-      secure: fEz6PnKZw03WaGCo9Ivqx743IaZWHARKrb6jbi1Q68oh/KY8xSLsgZpO7ooj3bRK0C+GIWZtAWBJ1BDjx0UKARRaWNkTDP5kLXrsOaGyiZPvtb2nQR5yqk/vy1c0wuA49O0qMGw9q6kEG7/jC5Hi+27oN1fDKPZyqhgnEh8WoHA=
+      secure: ORsTWm1b8xsEKQH6TJhqbhAzm3RKl/qHA5k2S5SNr/89jB9k8SwdRAnVXfDGCeWZNA7YznHAJ76VFyIqWciPGma0PrhzVRfZ4rCWlvi0wWxHaYn0lHFIg/moeKafTrMoh4To+Az0ieRFNdbm5nTPBrgqSx6Zh5xQk9WG8ex65jQ=
     on_success: change
     on_failure: change
     template:
     - "%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}
       | Details: %{build_url} | Changes: %{compare_url}"
-
 env:
-  - global:
-    - WARNINGS_ARE_ERRORS=1
-    - _R_CHECK_FORCE_SUGGESTS_=0
+- global:
+  - WARNINGS_ARE_ERRORS=1
+  - _R_CHECK_FORCE_SUGGESTS_=0
