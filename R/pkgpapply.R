@@ -45,7 +45,31 @@
 #'   pkgapply(function(pkg) { ... })
 #' }
 pkgapply <- function(packages, dir = getwd(), f) {
-  if (is.function(packages) && missing(f)) { f <- packages }
+  if (is.function(packages) && missing(f)) { f <- packages; packages <- NULL }
   if (is.function(dir)) { f <- dir; dir <- getwd() }
 
+  if (missing(packages) || is.null(packages)) {
+    packages <- Filter(is_package, list.files(dir))
+  }
+
+  packages <- lapply(packages, sanitize_package, dir)
+
+  lapply(packages, f)
 }
+
+sanitize_package <- function(pkg, dir) {
+  stopifnot(is.character(pkg) || devtools::is.package(pkg))
+  if (devtools::is.package(pkg)) return(pkg)
+  if (!file.exists(pkg)) {
+    pkg <- file.path(dir, pkg)
+  }
+  if (!file.exists(pkg)) {
+    stop("No such package: ", sQuote(pkg), call. = FALSE)
+  }
+  devtools::as.package(pkg)
+}
+
+is_package <- function(pkg) {
+  file.exists(file.path(pkg, 'DESCRIPTION'))
+}
+

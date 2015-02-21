@@ -6,7 +6,7 @@ describe("Iterating using a function", {
       pkgapply(pkgs, function(pkg) {
         DESCRIPTION_path <- file.path(pkg$path, 'DESCRIPTION')
         DESCRIPTION <- readLines(DESCRIPTION_path)
-        DESCRIPTION <- gsub("Depends: R \\([^(]+\\)", "R (5.0)")
+        DESCRIPTION <- gsub("Depends: R \\([^(]+\\)", "Depends: R (5.0)", DESCRIPTION)
         writeLines(DESCRIPTION, DESCRIPTION_path)
       })
 
