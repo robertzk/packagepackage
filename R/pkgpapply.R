@@ -21,7 +21,15 @@
 #' @param dir character. The root directory on which to iterate over
 #'   all the packages. By default, the current working directory.
 #' @param f function. The function to apply to each package. 
+#'   The argument the function receives is
+#'   \code{devtools::as.package(pkg_path)}, where \code{pkg_path} is
+#'   the absolute path of the package. The output of this will be a list
+#'   with a \code{path} key, as well as keys corresponding to each
+#'   element in the DESCRIPTION file (\code{title}, \code{version}, etc.).
+#' @return A list where each element is the result of \code{f} applied
+#'   to the respective package.
 #' @importFrom devtools as.package
+#' @seealso \code{\link[devtools]{as.package}}
 #' @examples
 #' \dontrun{
 #'   # You can use pkgapply to iterate over each package and apply some

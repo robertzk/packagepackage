@@ -19,7 +19,16 @@ These must be directories relative to \code{dir}.}
 \item{dir}{character. The root directory on which to iterate over
 all the packages. By default, the current working directory.}
 
-\item{f}{function. The function to apply to each package.}
+\item{f}{function. The function to apply to each package.
+The argument the function receives is
+\code{devtools::as.package(pkg_path)}, where \code{pkg_path} is
+the absolute path of the package. The output of this will be a list
+with a \code{path} key, as well as keys corresponding to each
+element in the DESCRIPTION file (\code{title}, \code{version}, etc.).}
+}
+\value{
+A list where each element is the result of \code{f} applied
+  to the respective package.
 }
 \description{
 This function is meant to be used by R developers that have to make
@@ -45,5 +54,8 @@ file.
   # If you do not provide a directory, the current directory will be used.
   pkgapply(function(pkg) { ... })
 }
+}
+\seealso{
+\code{\link[devtools]{as.package}}
 }
 
