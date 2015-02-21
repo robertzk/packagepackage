@@ -16,6 +16,6 @@
 #'   pkgapply(function(pkg) { ... })
 #' }
 #' @name packagepackage
-#' @import stringr
+#' @import stringr devtools
 #' @docType package
 NULL
