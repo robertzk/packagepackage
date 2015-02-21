@@ -13,7 +13,8 @@ Depends:
 License: MIT
 LazyData: true
 Imports:
-    stringr
+    stringr,
+    devtools
 Suggests:
     knitr,
     microbenchmark,
