@@ -54,8 +54,7 @@ pkgapply <- function(packages, dir = getwd(), f) {
 
 sanitize_package <- function(pkg) {
   stopifnot(is.character(pkg) || devtools::is.package(pkg))
-  if (devtools::is.package(pkg)) { pkg }
-  else { devtools::as.package(pkg) }
+  devtools::as.package(pkg)
 }
 
 prefix_package <- function(pkg, dir) {
