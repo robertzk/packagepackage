@@ -14,9 +14,10 @@ describe("Iterating using a function", {
     expect_error(pkgapply("boop", identity), "No such package")
   })
 
-  change_description <- function(..., check = pkgs) {
+  change_description <- function(..., check = pkgs, prelude = NULL) {
     eval.parent(substitute({
       with_packages({
+        prelude
         pkgapply(..., function(pkg) {
           DESCRIPTION_path <- file.path(pkg$path, 'DESCRIPTION')
           DESCRIPTION <- readLines(DESCRIPTION_path)
@@ -43,4 +44,15 @@ describe("Iterating using a function", {
     change_description(p <- c("package1", "package3"),
       dir = dir <- dirname(pkgs[1]), check = file.path(dir, p))
   })
+
+  test_that("it can be given just a dir", {
+    change_description(dir = dir <- dirname(pkgs[1]),
+      check = file.path(dir, paste0("package", 1:3)))
+  })
+
+  test_that("it can be given just a function", {
+    change_description(check = file.path(dirname(pkgs[1]), paste0("package", 1:3)),
+                       prelude = setwd(dirname(pkgs[1])))
+  })
 })
+
