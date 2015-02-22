@@ -2,4 +2,3 @@
 
 import(devtools)
 import(stringr)
-importFrom(devtools,as.package)

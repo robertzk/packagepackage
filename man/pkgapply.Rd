@@ -4,13 +4,7 @@
 \alias{pkgapply}
 \title{Apply an operation over several packages.}
 \usage{
-pkgapply(packages = c('package1', 'package2'), dir = '/root/dir', f = function(pkg) { ... })
-# Using current directory.
-pkgapply(packages = c('package1', 'package2'), f = function(pkg) { ... })
-# Auto-detect each directory which has a DESCRIPTION file in /root/dir.
-pkgapply(dir = '/root/dir', f = function(pkg) { ... })
-# Iterate over every auto-detected package in the current directory.
-pkgapply(f = function(pkg) { ... })
+pkgapply(packages, dir = getwd(), f)
 }
 \arguments{
 \item{packages}{character. A character vector of package names.

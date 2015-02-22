@@ -8,14 +8,6 @@
 #' \code{devtools::as.package(pkg_path)}, which has a \code{$path} available
 #' and whose other attributes originate directly from the package's DESCRIPTION
 #' file.
-#' @usage
-#' pkgapply(packages = c('package1', 'package2'), dir = '/root/dir', f = function(pkg) { ... })
-#' # Using current directory.
-#' pkgapply(packages = c('package1', 'package2'), f = function(pkg) { ... })
-#' # Auto-detect each directory which has a DESCRIPTION file in /root/dir.
-#' pkgapply(dir = '/root/dir', f = function(pkg) { ... })
-#' # Iterate over every auto-detected package in the current directory.
-#' pkgapply(f = function(pkg) { ... })
 #' @param packages character. A character vector of package names.
 #'   These must be directories relative to \code{dir}.
 #' @param dir character. The root directory on which to iterate over
@@ -28,7 +20,6 @@
 #'   element in the DESCRIPTION file (\code{title}, \code{version}, etc.).
 #' @return A list where each element is the result of \code{f} applied
 #'   to the respective package.
-#' @importFrom devtools as.package
 #' @seealso \code{\link[devtools]{as.package}}
 #' @examples
 #' \dontrun{
