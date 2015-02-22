@@ -37,6 +37,10 @@ describe("iterating using a function", {
       change_description(pkgs)
     })
 
+    test_that("it can be given S3 package objects", {
+      change_description(lapply(pkgs, devtools::as.package))
+    })
+
     test_that("it can focus on the packages it is told to focus on", {
       change_description(p <- file.path(dirname(pkgs[1]), c("package1", "package3")), check = p)
     })
