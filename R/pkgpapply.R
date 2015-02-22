@@ -9,13 +9,13 @@
 #' and whose other attributes originate directly from the package's DESCRIPTION
 #' file.
 #' @usage
-#' pkgapply(c('package1', 'package2'), dir = '/root/dir', function(pkg) { ... })
+#' pkgapply(packages = c('package1', 'package2'), dir = '/root/dir', f = function(pkg) { ... })
 #' # Using current directory.
-#' pkgapply(c('package1', 'package2'), function(pkg) { ... })
+#' pkgapply(packages = c('package1', 'package2'), f = function(pkg) { ... })
 #' # Auto-detect each directory which has a DESCRIPTION file in /root/dir.
-#' pkgapply(dir = '/root/dir', function(pkg) { ... })
+#' pkgapply(dir = '/root/dir', f = function(pkg) { ... })
 #' # Iterate over every auto-detected package in the current directory.
-#' pkgapply(function(pkg) { ... })
+#' pkgapply(f = function(pkg) { ... })
 #' @param packages character. A character vector of package names.
 #'   These must be directories relative to \code{dir}.
 #' @param dir character. The root directory on which to iterate over
