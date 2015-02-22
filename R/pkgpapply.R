@@ -21,6 +21,7 @@
 #' @return A list where each element is the result of \code{f} applied
 #'   to the respective package.
 #' @seealso \code{\link[devtools]{as.package}}
+#' @export
 #' @examples
 #' \dontrun{
 #'   # You can use pkgapply to iterate over each package and apply some

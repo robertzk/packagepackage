@@ -39,6 +39,7 @@ file.
   # You can use pkgapply to iterate over each package and apply some
   # operation.
   pkgapply(c('package1', 'package2'), dir = '/root/dir', function(pkg) { ... })
+  pkgapply(c('package1', 'package2'), function(pkg) { ... })
 
   # If you leave the package names blank, it will loop over all directories
   # relative to `dir` that contain a DESCRIPTION file and are thus recognized
