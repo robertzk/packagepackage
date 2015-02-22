@@ -10,12 +10,14 @@ Authors@R: c(person("Robert", "Krzyzanowski",
     email = "technoguyrob@gmail.com", role = c("aut", "cre")))
 Depends:
     R (>= 3.0.1)
-License: MIT
+License: GPL (>= 2)
 LazyData: true
 Imports:
-    stringr
+    stringr,
+    devtools
 Suggests:
     knitr,
     microbenchmark,
-    testthat
+    testthat,
+    testthatsomemore
 Roxygen: list(wrap = FALSE)
