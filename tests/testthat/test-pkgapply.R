@@ -14,7 +14,7 @@ describe("Iterating using a function", {
     expect_error(pkgapply("boop", identity), "No such package")
   })
 
-  change_description <- function(...) {
+  change_description <- function(..., check = pkgs) {
     eval.parent(substitute({
       with_packages({
         pkgapply(..., function(pkg) {
@@ -24,7 +24,7 @@ describe("Iterating using a function", {
           writeLines(DESCRIPTION, DESCRIPTION_path)
         })
 
-        for (pkg in pkgs) {
+        for (pkg in check) {
           expect_equal(devtools::as.package(pkg)$depends, "R (5.0)")
         }
       })
@@ -33,5 +33,14 @@ describe("Iterating using a function", {
 
   test_that("it can make a trivial change to each package's DESCRIPTION", {
     change_description(pkgs)
+  })
+
+  test_that("it can focus on the packages it is told to focus on", {
+    change_description(p <- file.path(dirname(pkgs[1]), c("package1", "package3")), check = p)
+  })
+
+  test_that("it can be given an explicit dir", {
+    change_description(p <- c("package1", "package3"),
+      dir = dir <- dirname(pkgs[1]), check = file.path(dir, p))
   })
 })

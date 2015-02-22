@@ -49,24 +49,30 @@ pkgapply <- function(packages, dir = getwd(), f) {
   if (is.function(dir)) { f <- dir; dir <- getwd() }
 
   if (missing(packages) || is.null(packages)) {
-    packages <- Filter(is_package, list.files(dir))
+    packages <- Filter(is_package, list.files(dir, full.names = TRUE))
+  } else { 
+    packages <- vapply(packages, prefix_package, character(1), dir)
   }
 
-  packages <- lapply(packages, sanitize_package, dir)
+  packages <- lapply(packages, sanitize_package)
 
   lapply(packages, f)
 }
 
-sanitize_package <- function(pkg, dir) {
+sanitize_package <- function(pkg) {
   stopifnot(is.character(pkg) || devtools::is.package(pkg))
-  if (devtools::is.package(pkg)) return(pkg)
+  if (devtools::is.package(pkg)) { pkg }
+  else { devtools::as.package(pkg) }
+}
+
+prefix_package <- function(pkg, dir) {
   if (!file.exists(pkg)) {
     pkg <- file.path(dir, pkg)
   }
   if (!file.exists(pkg)) {
     stop("No such package: ", sQuote(pkg), call. = FALSE)
   }
-  devtools::as.package(pkg)
+  pkg
 }
 
 is_package <- function(pkg) {
